@@ -3,7 +3,7 @@
 
 static uint32_t gpio_get_base_address (uint32_t ui32Port);
 
-void gpio_init (gpio_port_t port,uint8_t  pin, uint32_t dir)
+void gpio_init (gpio_port_t port,uint8_t  pin, uint32_t dir, uint32_t res)
 {
     uint32_t port_base_address = 0x00;
     switch (port)
@@ -53,9 +53,17 @@ void gpio_init (gpio_port_t port,uint8_t  pin, uint32_t dir)
     default:
         /* handle incorrect gpio port */
         break;
-    } 
-    ROM_GPIODirModeSet(port_base_address,pin,dir); 
-    ROM_GPIOPadConfigSet(port_base_address, pin, GPIO_STRENGTH_8MA, GPIO_PIN_TYPE_STD_WPU);
+    }
+    if (GPIO_DIR_MODE_OUT == dir)
+    {
+        ROM_GPIODirModeSet(port_base_address,GPIO_DIR_MODE_IN,dir); 
+        ROM_GPIOPadConfigSet(port_base_address, GPIO_DIR_MODE_IN, GPIO_STRENGTH_8MA, GPIO_PIN_TYPE_STD);
+    }
+    else if (GPIO_DIR_MODE_IN == dir)
+    {
+        ROM_GPIODirModeSet(port_base_address,GPIO_DIR_MODE_IN,dir); 
+        ROM_GPIOPadConfigSet(port_base_address, GPIO_DIR_MODE_IN, GPIO_STRENGTH_8MA, res);
+    }
 }
 
 void GPIOPinWrite(uint32_t ui32Port, uint8_t ui8Pins, gpio_value_t ui8Val)
@@ -108,7 +116,7 @@ gpio_value_t GPIOPinRead(uint32_t ui32Port, uint8_t ui8Pins)
     }
     else
     {
-        while (1);
+        
     }
     return pin_val;
 }

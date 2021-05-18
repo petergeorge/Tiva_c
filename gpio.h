@@ -93,7 +93,7 @@ typedef enum
 }gpio_port_t;
 
 
-void gpio_init (gpio_port_t port,uint8_t  pin, uint32_t dir);
+void gpio_init (gpio_port_t port,uint8_t  pin, uint32_t dir, uint32_t res);
 
 void GPIOPinWrite(uint32_t ui32Port, uint8_t ui8Pins, gpio_value_t ui8Val);
 

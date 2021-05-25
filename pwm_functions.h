@@ -1,0 +1,10 @@
+#define TARGET_IS_TM4C123_RB1
+#define PART_TM4C123GH6PM
+#include <stdbool.h>
+#include <stdint.h>
+#include "rom.h"
+#include "sysctl.h"
+#include "pin_map.h"
+#include "hw_memmap.h"
+#include "pwm.h"
+#include "gpio.h"

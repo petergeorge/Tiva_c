@@ -725,7 +725,7 @@
         </option>
         <option>
           <name>IlinkIcfFile</name>
-          <state></state>
+          <state>$TOOLKIT_DIR$\config\linker\TexasInstruments\TM4C123GH6.icf</state>
         </option>
         <option>
           <name>IlinkIcfFileSlave</name>
@@ -785,7 +785,7 @@
         </option>
         <option>
           <name>IlinkProgramEntryLabel</name>
-          <state></state>
+          <state>__iar_program_start</state>
         </option>
         <option>
           <name>DoFill</name>
@@ -1948,7 +1948,7 @@
     <name>$PROJ_DIR$\sysctl.h</name>
   </file>
   <file>
-    <name>$PROJ_DIR$\tm4c123gh6pm.h</name>
+    <name>$PROJ_DIR$\TM4C123GH6PM.h</name>
   </file>
 </project>
 

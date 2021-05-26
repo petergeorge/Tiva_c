@@ -2342,7 +2342,7 @@
     <name>$PROJ_DIR$\sysctl.h</name>
   </file>
   <file>
-    <name>$PROJ_DIR$\tm4c123gh6pm.h</name>
+    <name>$PROJ_DIR$\TM4C123GH6PM.h</name>
   </file>
 </project>
 

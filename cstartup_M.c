@@ -39,7 +39,7 @@ typedef union { intfunc __fun; void * __ptr; } intvec_elem;
 // the  NVIC vector table register (VTOR) before using interrupts.
 
 extern void vPortSVCHandler(void);
-extern void (void);
+extern void xPortPendSVHandler(void);
 extern void xPortSysTickHandler(void);
 
 

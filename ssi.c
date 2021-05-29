@@ -27,11 +27,64 @@ ROM_GPIOPinTypeSSI(GPIO_PORTA_BASE,5);
 
 //6. sets the SSI protocol, mode of operation, bit rate, and data width
   //ROM_SSIConfigSetExpClk(SSI0_BASE,120000000,SSI_FRF_MOTO_MODE_0,SSI_MODE_MASTER,F_SPI,8);
-  ROM_SSIConfigSetExpClk(SSI0_BASE,ROM_SysCtlClockGet(),SSI_FRF_MOTO_MODE_0,SSI_MODE_MASTER,F_SPI,8);
+  ROM_SSIConfigSetExpClk(SSI0_BASE,ROM_SysCtlClockGet(),SSI_FRF_MOTO_MODE_0,SSI_MODE_SLAVE,F_SPI,8);
   ROM_SSIEnable(SSI0_BASE);
 }
 
-void SSI_send_char (unsigned char data)
+void SSI_send_char (uint32_t data)
 {
     ROM_SSIDataPut(SSI0_BASE,data);
+}
+
+void SSI_receive_char (uint32_t * data)
+{
+  ROM_SSIDataGet(SSI0_BASE, data);
+}
+
+void SSI_Send_Receive_buffers (uint32_t ulDataRx[],uint32_t ulDataTx[],uint8_t size)
+{
+  uint8_t loop_index = 0;
+  if (size <8)
+  {
+    // Read any residual data from the SSI port.  This makes sure the receive
+    // FIFOs are empty, so we don't read any unwanted junk.  This is done here
+    // because the TI SSI mode is full-duplex, which allows you to send and
+    // receive at the same time.  The SSIDataGetNonBlocking function returns
+    // "true" when data was returned, and "false" when no data was returned.
+    // The "non-blocking" function checks if there is any data in the receive
+    // FIFO and does not "hang" if there isn't.
+    SSI_receive_char(&ulDataRx[0]);
+#ifdef debug
+    printf("SSI is ready \n");
+#endif    
+
+    for (loop_index = 0;loop_index<size;loop_index++)
+    {
+      SSI_send_char(ulDataTx[loop_index]);
+    }
+
+
+    while(ROM_SSIBusy(SSI0_BASE))
+    {
+    }
+
+    for (loop_index = 0;loop_index<size;loop_index++)
+    {
+      SSI_receive_char(&ulDataRx[loop_index]);
+      // Since we are using 8-bit data, mask off the MSB.
+      //
+      ulDataRx[loop_index] &= 0x00FF;
+    }
+#ifdef debug
+    printf("buffers sended and received successfully \n");
+#endif
+  }
+  else
+  {
+    /* error */
+#ifdef debug
+    printf("size error \n");
+#endif
+  }
+
 }

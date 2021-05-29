@@ -11,10 +11,10 @@ ByteLimit=50
 [LMIFTDIDriver]
 LMI_ResetMode=0x00000001
 LMI_LeaveTargetRunning=0x00000000
-LMIFTDIserialNo=0E20D16C
+LMIFTDIserialNo=0E2109B7
 LMIFTDIfoundProbes=
 [DebugChecksum]
-Checksum=1825929107
+Checksum=334657636
 [Exceptions]
 StopOnUncaught=_ 0
 StopOnThrow=_ 0
@@ -67,7 +67,8 @@ LogFile=_ ""
 [Disassemble mode]
 mode=0
 [Breakpoints]
-Count=0
+Bp0=_ "STD_CODE" "{$PROJ_DIR$\main.c}.17.3" 1 0 0 0 "" 0 ""
+Count=1
 [Aliases]
 Count=0
 SuppressDialog=0

@@ -8,7 +8,7 @@
 #include "pin_map.h"
 #include "hw_memmap.h"
 
-#define F_SPI 4000000
+#define F_SPI 1000000
 //*****************************************************************************
 #define SSI_TXEOT               0x00000040  // Transmit FIFO is empty
 #define SSI_DMATX               0x00000020  // DMA Transmit complete
@@ -63,6 +63,13 @@
 #define SSI_ADV_MODE_BI_WRITE   0x00000040
 #define SSI_ADV_MODE_QUAD_READ  0x00000180
 #define SSI_ADV_MODE_QUAD_WRITE 0x00000080
+
+#define debug
+
 void SSI_init (void);
 
-void SSI_send_char (unsigned char data);
+void SSI_send_char (uint32_t data);
+
+void SSI_receive_char (uint32_t * data);
+
+void SSI_Send_Receive_buffers (uint32_t ulDataRx[],uint32_t ulDataTx[],uint8_t size);

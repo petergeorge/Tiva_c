@@ -2321,7 +2321,16 @@
     <name>$PROJ_DIR$\FreeRTOSConfig.h</name>
   </file>
   <file>
+    <name>$PROJ_DIR$\gpio.c</name>
+  </file>
+  <file>
     <name>$PROJ_DIR$\heap_2.c</name>
+  </file>
+  <file>
+    <name>$PROJ_DIR$\I2C.c</name>
+  </file>
+  <file>
+    <name>$PROJ_DIR$\I2C.h</name>
   </file>
   <file>
     <name>$PROJ_DIR$\list.c</name>

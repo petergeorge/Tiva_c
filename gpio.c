@@ -56,13 +56,13 @@ void gpio_init (gpio_port_t port,uint8_t  pin, uint32_t dir, uint32_t res)
     }
     if (GPIO_DIR_MODE_OUT == dir)
     {
-        ROM_GPIODirModeSet(port_base_address,GPIO_DIR_MODE_IN,dir); 
-        ROM_GPIOPadConfigSet(port_base_address, GPIO_DIR_MODE_IN, GPIO_STRENGTH_8MA, GPIO_PIN_TYPE_STD);
+        ROM_GPIODirModeSet(port_base_address, pin, GPIO_DIR_MODE_OUT); 
+        ROM_GPIOPadConfigSet(port_base_address, pin, GPIO_STRENGTH_8MA, GPIO_PIN_TYPE_STD);
     }
     else if (GPIO_DIR_MODE_IN == dir)
     {
-        ROM_GPIODirModeSet(port_base_address,GPIO_DIR_MODE_IN,dir); 
-        ROM_GPIOPadConfigSet(port_base_address, GPIO_DIR_MODE_IN, GPIO_STRENGTH_8MA, res);
+        ROM_GPIODirModeSet(port_base_address, pin, GPIO_DIR_MODE_IN); 
+        ROM_GPIOPadConfigSet(port_base_address, pin, GPIO_STRENGTH_8MA, res);
     }
 }
 

@@ -1,4 +1,4 @@
-"C:\Users\Peter\Desktop\workingspace\RTOS_test\heap_2.c"
+"C:\Users\Peter\Desktop\workingspace\Tiva_c\heap_2.c"
 -std=c99
 -ferror-limit=100
 -I

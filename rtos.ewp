@@ -1951,6 +1951,9 @@
     <name>$PROJ_DIR$\portasm.s</name>
   </file>
   <file>
+    <name>$PROJ_DIR$\pwm_functions.c</name>
+  </file>
+  <file>
     <name>$PROJ_DIR$\queue.c</name>
   </file>
   <file>

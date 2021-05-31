@@ -1,3 +1,6 @@
+#ifndef GPIO_H
+#define GPIO_H
+
 #define TARGET_IS_BLIZZARD_RB1
 #define PART_TM4C123GH6PM
 
@@ -98,3 +101,5 @@ void gpio_init (gpio_port_t port,uint8_t  pin, uint32_t dir, uint32_t res);
 void GPIOPinWrite(gpio_port_t Port, uint8_t ui8Pins, gpio_value_t ui8Val);
 
 gpio_value_t GPIOPinRead(gpio_port_t Port, uint8_t ui8Pins);
+
+#endif

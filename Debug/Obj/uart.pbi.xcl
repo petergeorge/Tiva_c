@@ -1,4 +1,4 @@
-"C:\Users\Peter\Desktop\workingspace\RTOS_test\UART.c"
+"C:\Users\Peter\Desktop\workingspace\Tiva_c\UART.c"
 -std=c99
 -ferror-limit=100
 -I

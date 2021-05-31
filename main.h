@@ -8,8 +8,12 @@
 #include "I2C.h"
 #include "gpio.h"
 
-#define debug
-
+// #define debug
+#ifdef debug
+#define debug_print(x)                 printf(x)
+#else
+#define debug_print(x) 
+#endif
 void vLedTask(void * para);
 void vButtonTask (void * para);
 void vUART_Task (void * para);

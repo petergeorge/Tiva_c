@@ -1,7 +1,7 @@
 
 #include "gpio.h"
 
-static uint32_t gpio_get_base_address (uint32_t ui32Port);
+static uint32_t gpio_get_base_address (gpio_port_t ui32Port);
 
 void gpio_init (gpio_port_t port,uint8_t  pin, uint32_t dir, uint32_t res)
 {
@@ -66,12 +66,12 @@ void gpio_init (gpio_port_t port,uint8_t  pin, uint32_t dir, uint32_t res)
     }
 }
 
-void GPIOPinWrite(uint32_t ui32Port, uint8_t ui8Pins, gpio_value_t ui8Val)
+void GPIOPinWrite(gpio_port_t port, uint8_t ui8Pins, gpio_value_t ui8Val)
 {
     uint32_t port_address = 0x00;
     uint8_t out_val = 0x00;
 
-    port_address = gpio_get_base_address(ui32Port);
+    port_address = gpio_get_base_address(port);
 
     switch (ui8Val)
     {
@@ -95,15 +95,16 @@ void GPIOPinWrite(uint32_t ui32Port, uint8_t ui8Pins, gpio_value_t ui8Val)
     ROM_GPIOPinWrite(port_address,ui8Pins,out_val);
 }
 
-volatile int32_t ret_val = 0x00;
 
-gpio_value_t GPIOPinRead(uint32_t ui32Port, uint8_t ui8Pins)
+gpio_value_t GPIOPinRead(gpio_port_t port, uint8_t ui8Pins)
 {
+    int32_t ret_val = 0x00;
+
     uint32_t port_address = 0x00;
     
     gpio_value_t pin_val = low;
 
-    port_address = gpio_get_base_address(ui32Port);
+    port_address = gpio_get_base_address(port);
 
     ret_val = ROM_GPIOPinRead (port_address,ui8Pins);
     if (ret_val == ui8Pins)
@@ -121,7 +122,7 @@ gpio_value_t GPIOPinRead(uint32_t ui32Port, uint8_t ui8Pins)
     return pin_val;
 }
 
-static uint32_t gpio_get_base_address (uint32_t ui32Port)
+static uint32_t gpio_get_base_address (gpio_port_t ui32Port)
 {
     uint32_t port_address = 0x00;
 

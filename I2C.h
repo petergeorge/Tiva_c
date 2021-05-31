@@ -289,7 +289,7 @@
 #define HWREG(x)                                                              \
         (*((volatile uint32_t *)(x)))        
 
-#define debug
+// #define debug
 #define loop_back_enable
 
 void InitI2C0(void);

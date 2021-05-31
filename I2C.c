@@ -40,9 +40,7 @@ void InitI2C0(void)
 #ifdef loop_back_enable
     HWREG(I2C0_BASE + I2C_O_MCR) |= (1u<<0); // enable loop back
 #endif 
-#ifdef debug
-    printf("I2C is ready \n");
-#endif   
+    debug_print("I2C is ready \n");  
 
 }
 

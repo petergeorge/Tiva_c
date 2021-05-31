@@ -1,4 +1,5 @@
 #include "ssi.h"
+#include "TM4C123GH6PM.h"
 
 
 void SSI_init (void)
@@ -10,10 +11,7 @@ void SSI_init (void)
   ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);                                                      //enable General-Purpose Input/Output(GPIO)(page 338)   address 0x400FE608 for all Ports
 //3. Set the GPIO AFSEL bits for the appropriate pins (see page 668). To determine which GPIOs to
 //configure, see Table 23-4 on page 1337.
-ROM_GPIOPinTypeSSI(GPIO_PORTA_BASE,2);
-ROM_GPIOPinTypeSSI(GPIO_PORTA_BASE,3);
-ROM_GPIOPinTypeSSI(GPIO_PORTA_BASE,4);
-ROM_GPIOPinTypeSSI(GPIO_PORTA_BASE,5);
+ROM_GPIOPinTypeSSI(GPIO_PORTA_BASE,0x3c);
 //4. Configure the PMCn fields in the GPIOPCTL register to assign the SSI signals to the appropriate
 //pins. See page 685 and Table 23-5 on page 1344.
   
@@ -28,6 +26,13 @@ ROM_GPIOPinTypeSSI(GPIO_PORTA_BASE,5);
 //6. sets the SSI protocol, mode of operation, bit rate, and data width
   //ROM_SSIConfigSetExpClk(SSI0_BASE,120000000,SSI_FRF_MOTO_MODE_0,SSI_MODE_MASTER,F_SPI,8);
   ROM_SSIConfigSetExpClk(SSI0_BASE,ROM_SysCtlClockGet(),SSI_FRF_MOTO_MODE_0,SSI_MODE_SLAVE,F_SPI,8);
+  /* for using interrupt */
+  NVIC_SetPriorityGrouping(0);
+  NVIC_EnableIRQ(SSI0_IRQn);
+  NVIC_SetPriority(SSI0_IRQn,1);
+  __asm("cpsie i");
+  ROM_SSIIntEnable(SSI0_BASE,  SSI_RXFF);
+
   ROM_SSIEnable(SSI0_BASE);
 }
 
@@ -54,9 +59,7 @@ void SSI_Send_Receive_buffers (uint32_t ulDataRx[],uint32_t ulDataTx[],uint8_t s
     // The "non-blocking" function checks if there is any data in the receive
     // FIFO and does not "hang" if there isn't.
     SSI_receive_char(&ulDataRx[0]);
-#ifdef debug
-    printf("SSI is ready \n");
-#endif    
+    debug_print("SSI is ready \n");  
 
     for (loop_index = 0;loop_index<size;loop_index++)
     {
@@ -75,16 +78,27 @@ void SSI_Send_Receive_buffers (uint32_t ulDataRx[],uint32_t ulDataTx[],uint8_t s
       //
       ulDataRx[loop_index] &= 0x00FF;
     }
-#ifdef debug
-    printf("buffers sended and received successfully \n");
-#endif
+    debug_print("buffers sended and received successfully \n");
   }
   else
   {
     /* error */
-#ifdef debug
-    printf("size error \n");
-#endif
+    debug_print("size error \n");
   }
 
+}
+
+void SSI_clear_interrupt_flag (void)
+{
+  ROM_SSIIntDisable(SSI0_BASE,  SSI_RXFF);
+}
+
+void SSI_enable_interrupt (void)
+{
+  ROM_SSIIntEnable(SSI0_BASE,  SSI_RXFF);
+}
+
+void SSI_disable_interrupt (void)
+{
+  ROM_SSIIntDisable(SSI0_BASE,  SSI_RXFF);
 }

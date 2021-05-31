@@ -25,7 +25,7 @@ extern void SVC_Handler( void );
 extern void DebugMon_Handler( void );
 extern void PendSV_Handler( void );
 extern void SysTick_Handler( void );
-
+extern void ISR_SSI_handler( void );
 typedef void( *intfunc )( void );
 typedef union { intfunc __fun; void * __ptr; } intvec_elem;
 
@@ -62,7 +62,16 @@ const intvec_elem __vector_table[]=
   DebugMon_Handler,
   0,
   xPortPendSVHandler,
-  xPortSysTickHandler   
+  xPortSysTickHandler,   
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  ISR_SSI_handler
+  
 };
 
 #pragma call_graph_root = "interrupt"

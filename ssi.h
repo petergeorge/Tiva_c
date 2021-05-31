@@ -64,7 +64,7 @@
 #define SSI_ADV_MODE_QUAD_READ  0x00000180
 #define SSI_ADV_MODE_QUAD_WRITE 0x00000080
 
-#define debug
+// #define debug
 
 void SSI_init (void);
 

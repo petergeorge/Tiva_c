@@ -4,7 +4,7 @@ uint32_t SSI_tx_buffer [3] = {0};
 uint32_t SSI_rx_buffer [3] = {0};
 
 
-static void ssi_callout (void);
+static void ssi_callout (boolean_t ssi_ret);
 
 uint8_t var = 0;
 uint32_t spi_rx_buffer [1024] = {0};
@@ -51,7 +51,7 @@ void vSSI_Task (void * para)
 {
   for(;;)
   {
-    if(true == get_ssiFlagStatus)
+    if(true == get_ssiFlagStatus())
     {
     	ssi_cyclic();
     }
@@ -117,7 +117,14 @@ void vTaskPwm (void * para)
 }
 
 
-static void ssi_callout (void)
+static void ssi_callout (boolean_t ssi_ret)
 {
-	debug_print("ssi send receive completed suuccessfully \n");
+  if (ssi_ret == TRUE)
+  {
+    debug_print("ssi send receive completed suuccessfully \n");
+  }
+  else
+  {
+    debug_print("ssi send receive completed unsuuccessfully \n");
+  }
 }

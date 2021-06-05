@@ -14,7 +14,7 @@ LMI_LeaveTargetRunning=0x00000000
 LMIFTDIserialNo=0E2109B7
 LMIFTDIfoundProbes=
 [DebugChecksum]
-Checksum=-1847125046
+Checksum=-670762440
 [Exceptions]
 StopOnUncaught=_ 0
 StopOnThrow=_ 0

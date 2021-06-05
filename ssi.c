@@ -5,7 +5,7 @@ static uint32_t *ssi_ptrDataRx = NULL;
 static uint32_t *ssi_ptrDataTx = NULL;
 static uint16_t ssi_dataBufferSize = U8ZERO;
 static ssi_callcout_func_type ssi_callout_func = NULL;
-static boolean_t spi_flag = false;
+static boolean_t spi_flag = FALSE;
 
 static void SSI_send_char (uint32_t data);
 
@@ -15,7 +15,7 @@ static void SSI_clear_interrupt_flag (void);
 
 static void SSI_enable_interrupt (void);
 
-static void SSI_disable_interrupt (void)
+static void SSI_disable_interrupt (void);
 
 extern void SSI_init (void)
 {
@@ -74,7 +74,6 @@ extern void SSI_Send_Receive_buffers (uint32_t ulDataRx[],uint32_t ulDataTx[],ui
   else
   {
     /* error */
-    debug_print("size error \n");
   }
 
 }
@@ -95,7 +94,7 @@ static void SSI_disable_interrupt (void)
 }
 extern void set_ssiFlagStatusTrue (void)
 {
-	spi_flag = true;
+	spi_flag = TRUE;
 }
 extern boolean_t get_ssiFlagStatus (void)
 {
@@ -103,7 +102,7 @@ extern boolean_t get_ssiFlagStatus (void)
 }
 extern void ISR_SSI_handler (void)
 {
-	spi_flag = true;
+	spi_flag = TRUE;
     SSI_clear_interrupt_flag();
 }
 
@@ -113,14 +112,14 @@ extern void ssi_cyclic (void)
 
 	if (current_size < ssi_dataBufferSize)
 	{
-        SSI_receive_char(&ssi_ptrDataRx[size]);
+        SSI_receive_char(&ssi_ptrDataRx[current_size]);
         ssi_ptrDataRx[0] &= 0x000000FF;
-        SSI_send_char(ulDataTx[size]);
+        SSI_send_char(ssi_ptrDataTx[current_size]);
         current_size++;
 	}
 	else
 	{
-        ssi_callout_func(E_OK);
-		current_size = U8ZERO;
+          ssi_callout_func(E_OK);
+          current_size = U8ZERO;
 	}
 }

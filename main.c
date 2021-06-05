@@ -4,14 +4,15 @@ uint32_t SSI_tx_buffer [3] = {0};
 uint32_t SSI_rx_buffer [3] = {0};
 
 
-xQueueHandle xqueue;
+static void ssi_callout (void);
 
 uint8_t var = 0;
-uint8_t spi_flag = 0;
-uint32_t spi_rx_buffer [256] = {0};
+uint32_t spi_rx_buffer [1024] = {0};
+uint32_t spi_tx_buffer [1024] = {0};
 
 int main(void)
  {
+ uint16_t loop_index;
   pwm_init(SYSCTL_PERIPH_PWM1, SYSCTL_PERIPH_GPIOF, SYSCTL_PWMDIV_64);
   pwm_pin_config(GPIO_PORTF_BASE, GPIO_PF2_M1PWM6);
   pwm_ch_config(PWM1_BASE, PWM_GEN_3, PWM_GEN_MODE_DOWN, 50000,14000, PWM_OUT_6);
@@ -20,7 +21,12 @@ int main(void)
   gpio_init(portf,GPIO_PIN_1,GPIO_DIR_MODE_OUT,GPIO_PIN_TYPE_STD);
   gpio_init(portf,GPIO_PIN_4,GPIO_DIR_MODE_IN,GPIO_PIN_TYPE_STD_WPU);
   gpio_init(portf,GPIO_PIN_0,GPIO_DIR_MODE_IN,GPIO_PIN_TYPE_STD_WPU);
+  for (loop_index = 0; loop_index <1024 ;loop_index++)
+  {
+	  spi_tx_buffer[loop_index] = loop_index;
+  }
   SSI_init();
+  SSI_Send_Receive_buffers (spi_rx_buffer, spi_tx_buffer, 1024, ssi_callout);
   
     debug_print("Init is done\n");
 
@@ -43,15 +49,12 @@ void vUART_Task (void * para)
 
 void vSSI_Task (void * para)
 {
-  uint8_t loop_index = 0;
   for(;;)
   {
-    if(spi_flag == 1)
+    if(true == get_ssiFlagStatus)
     {
-      SSI_receive_char(&spi_rx_buffer[loop_index]);
-      spi_rx_buffer[loop_index++] &= 0x00FF;
-    } 
-    debug_print("SSI task is running\n");
+    	ssi_cyclic();
+    }
   }
 }
 
@@ -113,8 +116,8 @@ void vTaskPwm (void * para)
  } 
 }
 
-void ISR_SSI_handler (void)
+
+static void ssi_callout (void)
 {
-  spi_flag = 1;
-  SSI_clear_interrupt_flag();
+	debug_print("ssi send receive completed suuccessfully \n");
 }

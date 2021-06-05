@@ -3,6 +3,7 @@
 
 #include <stdbool.h>
 #include <stdint.h>
+#include "platform.h"
 #include "rom.h"
 #include "sysctl.h"
 #include "pin_map.h"
@@ -64,12 +65,24 @@
 #define SSI_ADV_MODE_QUAD_READ  0x00000180
 #define SSI_ADV_MODE_QUAD_WRITE 0x00000080
 
+#define SSI_TX_RX_BUFFER_SIZE	((uint16_t)1024)
+#define SSI_RX_MASK             ((uint32_t)0x000000FF)
 // #define debug
 
-void SSI_init (void);
+typedef void (* ssi_callcout_func_type)(boolean_t);
 
-void SSI_send_char (uint32_t data);
+extern void SSI_init (void);
 
-void SSI_receive_char (uint32_t * data);
+extern void SSI_Send_Receive_buffers (uint32_t ulDataRx[],uint32_t ulDataTx[],uint8_t size, ssi_callcout_func_type ssi_callout);
 
-void SSI_Send_Receive_buffers (uint32_t ulDataRx[],uint32_t ulDataTx[],uint8_t size);
+extern void set_ssiFlagStatusTrue (void);
+
+extern boolean_t get_ssiFlagStatus (void);
+
+extern void ssi_cyclic (void);
+
+extern void ISR_SSI_handler (void);
+
+extern void set_ssiFlagStatusTrue (void);
+
+extern boolean_t get_ssiFlagStatus (void);

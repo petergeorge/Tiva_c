@@ -1,8 +1,23 @@
 #include "ssi.h"
 #include "TM4C123GH6PM.h"
 
+static uint32_t *ssi_ptrDataRx = NULL;
+static uint32_t *ssi_ptrDataTx = NULL;
+static uint16_t ssi_dataBufferSize = U8ZERO;
+static ssi_callcout_func_type ssi_callout_func = NULL;
+static boolean_t spi_flag = false;
 
-void SSI_init (void)
+static void SSI_send_char (uint32_t data);
+
+static void SSI_receive_char (uint32_t * data);
+
+static void SSI_clear_interrupt_flag (void);
+
+static void SSI_enable_interrupt (void);
+
+static void SSI_disable_interrupt (void)
+
+extern void SSI_init (void)
 {
 //1. Enable the SSI module using the RCGCSSI register (see page 344).
   ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_SSI0);                                                       //enable SSI Module 0     address 0x400FE61C for all SSI modules(page 344)
@@ -36,49 +51,25 @@ ROM_GPIOPinTypeSSI(GPIO_PORTA_BASE,0x3c);
   ROM_SSIEnable(SSI0_BASE);
 }
 
-void SSI_send_char (uint32_t data)
+static void SSI_send_char (uint32_t data)
 {
     ROM_SSIDataPut(SSI0_BASE,data);
 }
 
-void SSI_receive_char (uint32_t * data)
+static void SSI_receive_char (uint32_t * data)
 {
   ROM_SSIDataGet(SSI0_BASE, data);
 }
 
-void SSI_Send_Receive_buffers (uint32_t ulDataRx[],uint32_t ulDataTx[],uint8_t size)
+extern void SSI_Send_Receive_buffers (uint32_t ulDataRx[],uint32_t ulDataTx[],uint8_t size, ssi_callcout_func_type ssi_callout)
 {
   uint8_t loop_index = 0;
-  if (size <8)
+  if ((size <SSI_TX_RX_BUFFER_SIZE)&&(NULL != ulDataRx)&&(NULL != ulDataTx)&&(ssi_callout != NULL))
   {
-    // Read any residual data from the SSI port.  This makes sure the receive
-    // FIFOs are empty, so we don't read any unwanted junk.  This is done here
-    // because the TI SSI mode is full-duplex, which allows you to send and
-    // receive at the same time.  The SSIDataGetNonBlocking function returns
-    // "true" when data was returned, and "false" when no data was returned.
-    // The "non-blocking" function checks if there is any data in the receive
-    // FIFO and does not "hang" if there isn't.
-    SSI_receive_char(&ulDataRx[0]);
-    debug_print("SSI is ready \n");  
-
-    for (loop_index = 0;loop_index<size;loop_index++)
-    {
-      SSI_send_char(ulDataTx[loop_index]);
-    }
-
-
-    while(ROM_SSIBusy(SSI0_BASE))
-    {
-    }
-
-    for (loop_index = 0;loop_index<size;loop_index++)
-    {
-      SSI_receive_char(&ulDataRx[loop_index]);
-      // Since we are using 8-bit data, mask off the MSB.
-      //
-      ulDataRx[loop_index] &= 0x00FF;
-    }
-    debug_print("buffers sended and received successfully \n");
+	 ssi_ptrDataRx = ulDataRx;
+	 ssi_ptrDataTx = ulDataTx;
+	 ssi_dataBufferSize = size;
+	 ssi_callout_func = ssi_callout;
   }
   else
   {
@@ -88,17 +79,48 @@ void SSI_Send_Receive_buffers (uint32_t ulDataRx[],uint32_t ulDataTx[],uint8_t s
 
 }
 
-void SSI_clear_interrupt_flag (void)
+static void SSI_clear_interrupt_flag (void)
 {
   ROM_SSIIntDisable(SSI0_BASE,  SSI_RXFF);
 }
 
-void SSI_enable_interrupt (void)
+static void SSI_enable_interrupt (void)
 {
   ROM_SSIIntEnable(SSI0_BASE,  SSI_RXFF);
 }
 
-void SSI_disable_interrupt (void)
+static void SSI_disable_interrupt (void)
 {
   ROM_SSIIntDisable(SSI0_BASE,  SSI_RXFF);
+}
+extern void set_ssiFlagStatusTrue (void)
+{
+	spi_flag = true;
+}
+extern boolean_t get_ssiFlagStatus (void)
+{
+	return spi_flag;
+}
+extern void ISR_SSI_handler (void)
+{
+	spi_flag = true;
+    SSI_clear_interrupt_flag();
+}
+
+extern void ssi_cyclic (void)
+{
+	static uint16_t current_size = 0;
+
+	if (current_size < ssi_dataBufferSize)
+	{
+        SSI_receive_char(&ssi_ptrDataRx[size]);
+        ssi_ptrDataRx[0] &= 0x000000FF;
+        SSI_send_char(ulDataTx[size]);
+        current_size++;
+	}
+	else
+	{
+        ssi_callout_func(E_OK);
+		current_size = U8ZERO;
+	}
 }

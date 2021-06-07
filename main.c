@@ -24,16 +24,6 @@ int main(void)
     }
 }
 
-void SPI0_Write(unsigned char data)
-{
-    GPIO_PORTA_DATA_R  &= ~(1<<2);       /* Make PF2 Selection line (SS) low */
-    while((SSI0_SR_R & 2) == 0); /* wait untill Tx FIFO is not full */
-    SSI0_DR_R = data;            /* transmit byte over SSI1Tx line */
-    while(SSI0_SR_R & 0x10);     /* wait until transmit complete */
-    GPIO_PORTA_DATA_R |= 0x04;        /* keep selection line (PF2) high in idle condition */
-}
-
-
 
 void SPI0_init(void)
 {

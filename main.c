@@ -1,8 +1,9 @@
 #include "SPI.h"
 
 /* function prototype of SPI and Delay */
-void SPI1_init(void);
-void SPI1_Write(unsigned char data);
+void SPI0_init(void);
+void SPI0_Write(unsigned char data);
+void SSI_send_char (uint32_t data);
 void Delay_ms(int time_ms); 
 
 /* Main routine of code */
@@ -11,17 +12,19 @@ int main(void)
     unsigned char val1 = 'A';
     unsigned char val2 = 'B';
 
-    SPI1_init();
+    SPI0_init();
     while(1)
 		{              
-    SPI1_Write(val1); /* write a character */
+    SSI_send_char(val1); /* write a character */
     Delay_ms(1000);
-    SPI1_Write(val2); /* write a character */
-    Delay_ms(1000);	
+    SSI_send_char(val2); /* write a character */
+    Delay_ms(1000);
+    
+    printf(val1);
     }
 }
 
-void SPI1_Write(unsigned char data)
+void SPI0_Write(unsigned char data)
 {
     GPIO_PORTA_DATA_R  &= ~(1<<2);       /* Make PF2 Selection line (SS) low */
     while((SSI0_SR_R & 2) == 0); /* wait untill Tx FIFO is not full */
@@ -30,35 +33,37 @@ void SPI1_Write(unsigned char data)
     GPIO_PORTA_DATA_R |= 0x04;        /* keep selection line (PF2) high in idle condition */
 }
 
-void SPI1_init(void)
+
+
+void SPI0_init(void)
 {
-    /* Enable clock to SPI1, GPIOD and GPIOF */
-	
-    SYSCTL_RCGCSSI_R |= (1<<0);   /*set clock enabling bit for SPI0 */
-    SYSCTL_RCGCGPIO_R |= (1<<0); /* enable clock to GPIOA for SPI1 */
-    SYSCTL_RCGCGPIO_R |= (1<<0); /* enable clock to GPIOA for slave select */
 
-    /*Initialize pins for SPI0 alternate function*/
-	
-    GPIO_PORTA_AMSEL_R &= ~0xFF;      /* disable analog functionality PA2:PA5 */
-    GPIO_PORTA_DEN_R |= 0x3C;         /* Set PA2:PA5 as digital pin */
-    GPIO_PORTA_AFSEL_R |= 0x3C;       /* enable alternate function of PA2:PA5*/
-    GPIO_PORTA_PCTL_R &= ~0x00FFFF00; /* assign PA2:PA5 pins to PA2:PA5 */
-    GPIO_PORTA_PCTL_R |= 0x00222200;  /* assign PA2:PA5 pins to PA2:PA5  */
-    
-    /* Initialize PF2 as a digital output as a slave select pin 
-	
-    GPIO_PORTA_DEN_R |= (1<<2);         /* set PF2 pin digital 
-    GPIO_PORTA_DIR_R |= (1<<2);         /* set PF2 pin output 
-    GPIO_PORTA_DATA_R |= (1<<2);        /* keep SS idle high */
 
-    /* Select SPI0 as a Master, POL = 0, PHA = 0, clock = 4 MHz, 8 bit data */
-		
-    SSI0_CR1_R = 0;          /* disable SPI1 and configure it as a Master */
-    SSI0_CC_R = 0;           /* Enable System clock Option */
-    SSI0_CPSR_R = 4;         /* Select prescaler value of 4 .i.e 16MHz/4 = 4MHz */
-    SSI0_CR0_R = 0x00007;     /* 4MHz SPI0 clock, SPI mode, 8 bit data */
-    SSI0_CR1_R |= 2;         /* enable SPI0 */
+    //1. Enable the SSI module using the RCGCSSI register (see page 344).
+  ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_SSI0);                                                       //enable SSI Module 0     address 0x400FE61C for all SSI modules(page 344)
+//2. Enable the clock to the appropriate GPIO module via the RCGCGPIO register (see page 338).
+//To find out which GPIO port to enable, refer to Table 23-5 on page 1344.
+  ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);                                                      //enable General-Purpose Input/Output(GPIO)(page 338)   address 0x400FE608 for all Ports
+//3. Set the GPIO AFSEL bits for the appropriate pins (see page 668). To determine which GPIOs to
+//configure, see Table 23-4 on page 1337.
+ROM_GPIOPinTypeSSI(GPIO_PORTA_BASE,0x3c);
+//4. Configure the PMCn fields in the GPIOPCTL register to assign the SSI signals to the appropriate
+//pins. See page 685 and Table 23-5 on page 1344.
+  
+  ROM_GPIOPinConfigure(GPIO_PA2_SSI0CLK );
+  ROM_GPIOPinConfigure(GPIO_PA3_SSI0FSS );
+  ROM_GPIOPinConfigure(GPIO_PA4_SSI0RX );
+  ROM_GPIOPinConfigure(GPIO_PA5_SSI0TX );
+  
+//5. Set the clock
+  ROM_SSIClockSourceSet(SSI0_BASE,SSI_CLOCK_SYSTEM);
+
+//6. sets the SSI protocol, mode of operation, bit rate, and data width
+  //ROM_SSIConfigSetExpClk(SSI0_BASE,120000000,SSI_FRF_MOTO_MODE_0,SSI_MODE_MASTER,F_SPI,8);
+  ROM_SSIConfigSetExpClk(SSI0_BASE,ROM_SysCtlClockGet(),
+  SSI_FRF_MOTO_MODE_0,SSI_MODE_MASTER,4000000,8);
+  ROM_SSIEnable(SSI0_BASE);
+
 }
 
 /* This function generates delay in ms */

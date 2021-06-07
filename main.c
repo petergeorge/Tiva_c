@@ -5,20 +5,26 @@ void SPI0_init(void);
 void SPI0_Write(unsigned char data);
 void SSI_send_char (uint32_t data);
 void Delay_ms(int time_ms); 
-
+void SSI_Receive_char (unsigned char * data);
+unsigned char data[];
 /* Main routine of code */
 int main(void)
 {
+    unsigned char data[100];
     unsigned char val1 = 'A';
     unsigned char val2 = 'B';
 
     SPI0_init();
+    
     while(1)
 		{              
     SSI_send_char(val1); /* write a character */
     Delay_ms(1000);
     SSI_send_char(val2); /* write a character */
     Delay_ms(1000);
+    SSI_Receive_char (data);
+    //printf(data[0]);
+    printf("\n");
     
     printf(val1);
     }
@@ -52,6 +58,14 @@ ROM_GPIOPinTypeSSI(GPIO_PORTA_BASE,0x3c);
   //ROM_SSIConfigSetExpClk(SSI0_BASE,120000000,SSI_FRF_MOTO_MODE_0,SSI_MODE_MASTER,F_SPI,8);
   ROM_SSIConfigSetExpClk(SSI0_BASE,ROM_SysCtlClockGet(),
   SSI_FRF_MOTO_MODE_0,SSI_MODE_MASTER,4000000,8);
+
+  /* Setting Interrupt */
+  NVIC_SetPriorityGrouping(0);
+  NVIC_EnableIRQ(SSI0_IRQn);
+  NVIC_SetPriority(SSI0_IRQn,1);
+  __asm("cpsie i");
+
+  ROM_SSIIntEnable(SSI0_BASE,SSI_RXFF);
   ROM_SSIEnable(SSI0_BASE);
 
 }
@@ -66,7 +80,9 @@ void Delay_ms(int time_ms)
         for(j = 0; j < 3180; j++)
             {}  /* excute NOP for 1ms */
 }
+
  void ISR_SSI_handler()
  {
-   
+     SSI_Receive_char (data);
+     ROM_SSIIntClear(SSI0_BASE,SSI_RXFF );
  }

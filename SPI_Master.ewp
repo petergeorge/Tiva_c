@@ -132,15 +132,15 @@
         </option>
         <option>
           <name>OGUseCmsis</name>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>OGUseCmsisDspLib</name>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>GRuntimeLibThreads</name>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>CoreVariant</name>
@@ -552,7 +552,7 @@
         </option>
         <option>
           <name>AOutputFile</name>
-          <state></state>
+          <state>$FILE_BNAME$.o</state>
         </option>
         <option>
           <name>AMultibyteSupport</name>
@@ -606,7 +606,7 @@
         </option>
         <option>
           <name>OOCOutputFile</name>
-          <state></state>
+          <state>SPI_Master.srec</state>
         </option>
         <option>
           <name>OOCCommandLineProducer</name>

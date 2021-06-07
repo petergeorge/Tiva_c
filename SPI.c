@@ -36,3 +36,5 @@ void SSI_Receive_char (uint32_t * data)
 {
     ROM_SSIDataGet (SSI0_BASE, data);
 }
+
+  

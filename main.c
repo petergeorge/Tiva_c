@@ -59,13 +59,13 @@ ROM_GPIOPinTypeSSI(GPIO_PORTA_BASE,0x3c);
   ROM_SSIConfigSetExpClk(SSI0_BASE,ROM_SysCtlClockGet(),
   SSI_FRF_MOTO_MODE_0,SSI_MODE_MASTER,4000000,8);
 
-  /* Setting Interrupt */
+  /* Setting Interrupt 
   NVIC_SetPriorityGrouping(0);
   NVIC_EnableIRQ(SSI0_IRQn);
   NVIC_SetPriority(SSI0_IRQn,1);
   __asm("cpsie i");
 
-  ROM_SSIIntEnable(SSI0_BASE,SSI_RXFF);
+  ROM_SSIIntEnable(SSI0_BASE,SSI_RXFF);*/
   ROM_SSIEnable(SSI0_BASE);
 
 }

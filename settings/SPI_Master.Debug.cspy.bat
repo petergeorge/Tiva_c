@@ -25,7 +25,7 @@ if not "%~1" == "" goto debugFile
 
 @echo on 
 
-"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\common\bin\cspybat" -f "D:\Shawadfy\Github\settings\SPI_Master.Debug.general.xcl" --backend -f "D:\Shawadfy\Github\settings\SPI_Master.Debug.driver.xcl" 
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\common\bin\cspybat" -f "C:\Users\Peter\Desktop\workingspace\Tiva_c - Copy\settings\SPI_Master.Debug.general.xcl" --backend -f "C:\Users\Peter\Desktop\workingspace\Tiva_c - Copy\settings\SPI_Master.Debug.driver.xcl" 
 
 @echo off 
 goto end 
@@ -34,7 +34,7 @@ goto end
 
 @echo on 
 
-"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\common\bin\cspybat" -f "D:\Shawadfy\Github\settings\SPI_Master.Debug.general.xcl" "--debug_file=%~1" --backend -f "D:\Shawadfy\Github\settings\SPI_Master.Debug.driver.xcl" 
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\common\bin\cspybat" -f "C:\Users\Peter\Desktop\workingspace\Tiva_c - Copy\settings\SPI_Master.Debug.general.xcl" "--debug_file=%~1" --backend -f "C:\Users\Peter\Desktop\workingspace\Tiva_c - Copy\settings\SPI_Master.Debug.driver.xcl" 
 
 @echo off 
 :end

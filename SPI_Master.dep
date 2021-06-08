@@ -6,59 +6,57 @@
   <configuration>
     <name>Debug</name>
     <outputs>
-      <file>$PROJ_DIR$\TM4C123GH6PM.h</file>
-      <file>$PROJ_DIR$\Debug\List\SPI_Master.map</file>
-      <file>$PROJ_DIR$\cstartup_M.c</file>
-      <file>$PROJ_DIR$\sysctl.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\cstartup_M.pbi</file>
+      <file>$TOOLKIT_DIR$\inc\c\ycheck.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\main.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\cstartup_M.__cstat.et</file>
+      <file>$PROJ_DIR$\ssi.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Config_Full.h</file>
       <file>$PROJ_DIR$\main.c</file>
-      <file>$PROJ_DIR$\gpio.h</file>
-      <file>$TOOLKIT_DIR$\lib\m7M_tls.a</file>
-      <file>$PROJ_DIR$\hw_memmap.h</file>
-      <file>$PROJ_DIR$\SPI.c</file>
-      <file>$PROJ_DIR$\pin_map.h</file>
       <file>$PROJ_DIR$\rom.h</file>
       <file>$PROJ_DIR$\SPI.h</file>
+      <file>$PROJ_DIR$\gpio.h</file>
       <file>$PROJ_DIR$\spi_hw.h</file>
-      <file>$TOOLKIT_DIR$\lib\dl7M_tln.a</file>
-      <file>$TOOLKIT_DIR$\inc\c\yvals.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\SPI.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\main.pbi</file>
-      <file>$TOOLKIT_DIR$\inc\c\xencoding_limits.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\main.__cstat.et</file>
+      <file>$PROJ_DIR$\pin_map.h</file>
+      <file>$PROJ_DIR$\cstartup_M.c</file>
+      <file>$PROJ_DIR$\SPI.c</file>
+      <file>$PROJ_DIR$\TM4C123GH6PM.h</file>
+      <file>$PROJ_DIR$\sysctl.h</file>
+      <file>$PROJ_DIR$\Debug\Exe\SPI_Master.out</file>
+      <file>$PROJ_DIR$\hw_memmap.h</file>
       <file>$TOOLKIT_DIR$\inc\c\stdint.h</file>
+      <file>$TOOLKIT_DIR$\lib\dl7M_tln.a</file>
       <file>$TOOLKIT_DIR$\config\linker\TexasInstruments\TM4C123GH6.icf</file>
       <file>$TOOLKIT_DIR$\inc\c\DLib_Defaults.h</file>
       <file>$PROJ_DIR$\Debug\Obj\SPI.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\main.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\SPI_Master.pbd</file>
       <file>$TOOLKIT_DIR$\inc\c\stdbool.h</file>
+      <file>$TOOLKIT_DIR$\lib\m7M_tls.a</file>
+      <file>$TOOLKIT_DIR$\inc\c\xencoding_limits.h</file>
       <file>$PROJ_DIR$\Debug\Obj\SPI.__cstat.et</file>
       <file>$TOOLKIT_DIR$\lib\shb_l.a</file>
       <file>$TOOLKIT_DIR$\inc\c\DLib_Threads.h</file>
       <file>$TOOLKIT_DIR$\inc\c\DLib_Product.h</file>
       <file>$PROJ_DIR$\Debug\Obj\cstartup_M.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\main.o</file>
-      <file>$PROJ_DIR$\ssi.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\cstartup_M.pbi</file>
-      <file>$TOOLKIT_DIR$\inc\c\ycheck.h</file>
-      <file>$PROJ_DIR$\Debug\Exe\SPI_Master.out</file>
-      <file>$PROJ_DIR$\Debug\Obj\cstartup_M.__cstat.et</file>
       <file>$TOOLKIT_DIR$\lib\rt7M_tl.a</file>
-      <file>$TOOLKIT_DIR$\inc\c\DLib_Config_Full.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\yvals.h</file>
+      <file>$PROJ_DIR$\Debug\List\SPI_Master.map</file>
+      <file>$PROJ_DIR$\Debug\Obj\SPI.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\main.__cstat.et</file>
+      <file>$TOOLKIT_DIR$\CMSIS\Include\core_cm4.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\intrinsics.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\cmsis_iar.h</file>
+      <file>$TOOLKIT_DIR$\CMSIS\Include\core_cmSimd.h</file>
+      <file>$TOOLKIT_DIR$\CMSIS\Include\core_cmInstr.h</file>
+      <file>$TOOLKIT_DIR$\CMSIS\Include\core_cmFunc.h</file>
     </outputs>
     <file>
-      <name>$PROJ_DIR$\cstartup_M.c</name>
+      <name>[ROOT_NODE]</name>
       <outputs>
         <tool>
-          <name>ICCARM</name>
-          <file> 29</file>
-        </tool>
-        <tool>
-          <name>BICOMP</name>
-          <file> 32</file>
-        </tool>
-        <tool>
-          <name>__cstat</name>
-          <file> 35</file>
+          <name>ILINK</name>
+          <file> 16 35</file>
         </tool>
       </outputs>
     </file>
@@ -67,48 +65,69 @@
       <outputs>
         <tool>
           <name>BICOMP</name>
-          <file> 16</file>
+          <file> 23</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 2</file>
         </tool>
         <tool>
           <name>__cstat</name>
-          <file> 18</file>
+          <file> 37</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
-          <name>ICCARM</name>
-          <file> 11 24 19 33 14 21 37 28 17 27 10 3 9 7 5 31 0</file>
+          <name>BICOMP</name>
+          <file> 31 41 17 18 34 1 15 4 5 25 7 11 9 14 21 27 30 42 39 8 38 43 40</file>
         </tool>
         <tool>
-          <name>BICOMP</name>
-          <file> 28 7 19 14 33 3 31 37 24 10 9 5 0 21 17 27 11</file>
+          <name>ICCARM</name>
+          <file> 8 25 18 1 34 21 5 31 27 30 7 15 11 17 9 4 14 38 42 40 39 43 41</file>
         </tool>
       </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\cstartup_M.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 0</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 32</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 3</file>
+        </tool>
+      </outputs>
     </file>
     <file>
       <name>$PROJ_DIR$\SPI.c</name>
       <outputs>
         <tool>
+          <name>BICOMP</name>
+          <file> 36</file>
+        </tool>
+        <tool>
           <name>ICCARM</name>
           <file> 22</file>
         </tool>
         <tool>
-          <name>BICOMP</name>
-          <file> 15</file>
-        </tool>
-        <tool>
           <name>__cstat</name>
-          <file> 25</file>
+          <file> 28</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
-          <name>ICCARM</name>
-          <file> 11 24 19 33 14 21 37 28 17 27 10 3 9 7 5 31 0</file>
+          <name>BICOMP</name>
+          <file> 31 41 17 18 34 1 15 4 5 25 7 11 9 14 21 27 30 42 39 8 38 43 40</file>
         </tool>
         <tool>
-          <name>BICOMP</name>
-          <file> 28 7 19 14 33 3 31 37 24 10 9 5 0 21 17 27 11</file>
+          <name>ICCARM</name>
+          <file> 8 25 18 1 34 21 5 31 27 30 7 15 11 17 9 4 14 38 42 40 39 43 41</file>
         </tool>
       </inputs>
     </file>
@@ -117,24 +136,15 @@
       <outputs>
         <tool>
           <name>ILINK</name>
-          <file> 1</file>
+          <file> 35</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>ILINK</name>
-          <file> 20 29 30 22 26 36 6 13</file>
+          <file> 20 32 2 22 29 33 26 19</file>
         </tool>
       </inputs>
-    </file>
-    <file>
-      <name>[ROOT_NODE]</name>
-      <outputs>
-        <tool>
-          <name>ILINK</name>
-          <file> 1 34</file>
-        </tool>
-      </outputs>
     </file>
   </configuration>
   <configuration>

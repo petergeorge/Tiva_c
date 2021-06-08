@@ -1,0 +1,195 @@
+###############################################################################
+#
+# IAR ELF Linker V7.70.1.11437/W32 for ARM                08/Jun/2021  22:26:14
+# Copyright 2007-2016 IAR Systems AB.
+#
+#    Output file  =  
+#        C:\Users\Peter\Desktop\workingspace\SPI_Slave_v2\Debug\Exe\SPI_Slave_v2.out
+#    Map file     =  
+#        C:\Users\Peter\Desktop\workingspace\SPI_Slave_v2\Debug\List\SPI_Slave_v2.map
+#    Command line =  
+#        C:\Users\Peter\Desktop\workingspace\SPI_Slave_v2\Debug\Obj\cstartup_M.o
+#        C:\Users\Peter\Desktop\workingspace\SPI_Slave_v2\Debug\Obj\main.o
+#        C:\Users\Peter\Desktop\workingspace\SPI_Slave_v2\Debug\Obj\SPI.o -o
+#        C:\Users\Peter\Desktop\workingspace\SPI_Slave_v2\Debug\Exe\SPI_Slave_v2.out
+#        --redirect _Printf=_PrintfFull --redirect _Scanf=_ScanfFull --map
+#        C:\Users\Peter\Desktop\workingspace\SPI_Slave_v2\Debug\List\SPI_Slave_v2.map
+#        --config "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\config\linker\TexasInstruments\TM4C123GH6.icf" --semihosting
+#        --entry __iar_program_start --vfe
+#
+###############################################################################
+
+*******************************************************************************
+*** RUNTIME MODEL ATTRIBUTES
+***
+
+CppFlavor       = *
+__SystemLibrary = DLib
+
+
+*******************************************************************************
+*** PLACEMENT SUMMARY
+***
+
+"A0":  place at 0x00000000 { ro section .intvec };
+"P1":  place in [from 0x00000000 to 0x0003ffff] { ro };
+"P2":  place in [from 0x20000000 to 0x20007fff] { rw, block CSTACK, block HEAP };
+
+  Section          Kind        Address    Size  Object
+  -------          ----        -------    ----  ------
+"A0":                                     0x60
+  .intvec          const    0x00000000    0x60  cstartup_M.o [1]
+                          - 0x00000060    0x60
+
+"P1":                                    0x278
+  .text            ro code  0x00000060   0x138  main.o [1]
+  .text            ro code  0x00000198    0x40  SPI.o [1]
+  .text            ro code  0x000001d8    0x40  zero_init3.o [5]
+  .text            ro code  0x00000218    0x28  data_init.o [5]
+  .text            ro code  0x00000240    0x22  fpinit_M.o [4]
+  .iar.init_table  const    0x00000264    0x10  - Linker created -
+  .text            ro code  0x00000274     0x2  cstartup_M.o [1]
+  .text            ro code  0x00000278    0x1a  cmain.o [5]
+  .text            ro code  0x00000292     0x4  low_level_init.o [3]
+  .text            ro code  0x00000296     0x4  exit.o [3]
+  .text            ro code  0x0000029a     0x2  cstartup_M.o [1]
+  .text            ro code  0x0000029c     0xa  cexit.o [5]
+  .text            ro code  0x000002a6     0x2  cstartup_M.o [1]
+  .text            ro code  0x000002a8    0x14  exit.o [6]
+  .text            ro code  0x000002bc    0x10  cstartup_M.o [1]
+  .text            ro code  0x000002cc     0x2  cstartup_M.o [1]
+  .text            ro code  0x000002ce     0x2  cstartup_M.o [1]
+  .text            ro code  0x000002d0     0x2  cstartup_M.o [1]
+  .text            ro code  0x000002d2     0x2  cstartup_M.o [1]
+  .text            ro code  0x000002d4     0x2  cstartup_M.o [1]
+  .text            ro code  0x000002d6     0x2  cstartup_M.o [1]
+  .rodata          const    0x000002d8     0x0  zero_init3.o [5]
+                          - 0x000002d8   0x278
+
+"P2", part 1 of 2:                       0x404
+  .bss             zero     0x20000000   0x400  main.o [1]
+  .bss             zero     0x20000400     0x1  main.o [1]
+                          - 0x20000401   0x401
+
+"P2", part 2 of 2:                      0x1000
+  CSTACK                    0x20000408  0x1000  <Block>
+    CSTACK         uninit   0x20000408  0x1000  <Block tail>
+                          - 0x20001408  0x1000
+
+
+*******************************************************************************
+*** INIT TABLE
+***
+
+          Address     Size
+          -------     ----
+Zero (__iar_zero_init3)
+    1 destination range, total size 0x401:
+          0x20000000  0x401
+
+
+
+*******************************************************************************
+*** MODULE SUMMARY
+***
+
+    Module            ro code  ro data  rw data
+    ------            -------  -------  -------
+C:\Users\Peter\Desktop\workingspace\SPI_Slave_v2\Debug\Obj: [1]
+    SPI.o                  64
+    cstartup_M.o           34       96
+    main.o                312             1 025
+    -------------------------------------------
+    Total:                410       96    1 025
+
+command line: [2]
+    -------------------------------------------
+    Total:
+
+dl7M_tln.a: [3]
+    exit.o                  4
+    low_level_init.o        4
+    -------------------------------------------
+    Total:                  8
+
+m7M_tls.a: [4]
+    fpinit_M.o             34
+    -------------------------------------------
+    Total:                 34
+
+rt7M_tl.a: [5]
+    cexit.o                10
+    cmain.o                26
+    data_init.o            40
+    zero_init3.o           64
+    -------------------------------------------
+    Total:                140
+
+shb_l.a: [6]
+    exit.o                 20
+    -------------------------------------------
+    Total:                 20
+
+    Gaps                    2        2
+    Linker created                  16    4 096
+-----------------------------------------------
+    Grand Total:          614      114    5 121
+
+
+*******************************************************************************
+*** ENTRY LIST
+***
+
+Entry                      Address   Size  Type      Object
+-----                      -------   ----  ----      ------
+.iar.init_table$$Base   0x00000264          --   Gb  - Linker created -
+.iar.init_table$$Limit  0x00000274          --   Gb  - Linker created -
+?main                   0x00000279         Code  Gb  cmain.o [5]
+BusFault_Handler        0x000002cd    0x2  Code  Wk  cstartup_M.o [1]
+CSTACK$$Base            0x20000408          --   Gb  - Linker created -
+CSTACK$$Limit           0x20001408          --   Gb  - Linker created -
+DebugMon_Handler        0x000002d3    0x2  Code  Wk  cstartup_M.o [1]
+HardFault_Handler       0x0000029b    0x2  Code  Wk  cstartup_M.o [1]
+ISR_SSI_handler         0x0000015b   0x16  Code  Gb  main.o [1]
+MemManage_Handler       0x000002a7    0x2  Code  Wk  cstartup_M.o [1]
+NMI_Handler             0x00000275    0x2  Code  Wk  cstartup_M.o [1]
+PendSV_Handler          0x000002d5    0x2  Code  Wk  cstartup_M.o [1]
+Region$$Table$$Base     0x00000264          --   Gb  - Linker created -
+Region$$Table$$Limit    0x00000274          --   Gb  - Linker created -
+SPI0_init               0x000000cf   0x8c  Code  Gb  main.o [1]
+SSI_Receive_char        0x000001b7   0x1a  Code  Gb  SPI.o [1]
+SSI_send_char           0x00000199   0x1e  Code  Gb  SPI.o [1]
+SVC_Handler             0x000002d1    0x2  Code  Wk  cstartup_M.o [1]
+SysTick_Handler         0x000002d7    0x2  Code  Wk  cstartup_M.o [1]
+UsageFault_Handler      0x000002cf    0x2  Code  Wk  cstartup_M.o [1]
+__cmain                 0x00000279         Code  Gb  cmain.o [5]
+__exit                  0x000002a9   0x14  Code  Gb  exit.o [6]
+__iar_data_init3        0x00000219   0x28  Code  Gb  data_init.o [5]
+__iar_init_vfp          0x00000241         Code  Gb  fpinit_M.o [4]
+__iar_program_start     0x000002bd   0x10  Code  Gb  cstartup_M.o [1]
+__iar_zero_init3        0x000001d9   0x40  Code  Gb  zero_init3.o [5]
+__low_level_init        0x00000293    0x4  Code  Gb  low_level_init.o [3]
+__vector_table          0x00000000   0x60  Data  Gb  cstartup_M.o [1]
+_call_main              0x00000285         Code  Gb  cmain.o [5]
+_exit                   0x0000029d         Code  Gb  cexit.o [5]
+_main                   0x0000028f         Code  Gb  cmain.o [5]
+data                    0x20000000  0x400  Data  Gb  main.o [1]
+exit                    0x00000297    0x4  Code  Gb  exit.o [3]
+i                       0x20000400    0x1  Data  Gb  main.o [1]
+main                    0x00000061   0x6e  Code  Gb  main.o [1]
+
+
+[1] = C:\Users\Peter\Desktop\workingspace\SPI_Slave_v2\Debug\Obj
+[2] = command line
+[3] = dl7M_tln.a
+[4] = m7M_tls.a
+[5] = rt7M_tl.a
+[6] = shb_l.a
+
+    614 bytes of readonly  code memory
+    114 bytes of readonly  data memory
+  5 121 bytes of readwrite data memory
+
+Errors: none
+Warnings: none

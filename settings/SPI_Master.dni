@@ -38,12 +38,12 @@ ShowSource=1
 Freq=10000000
 MultiCoreRunAll=1
 [LMIFTDIDriver]
-LMIFTDIserialNo=0E22CAE8
+LMIFTDIserialNo=0E22C63A
 LMIFTDIfoundProbes=
 LMI_ResetMode=0x00000000
 LMI_LeaveTargetRunning=0x00000000
 [DebugChecksum]
-Checksum=-1928395259
+Checksum=590789976
 [Exceptions]
 StopOnUncaught=_ 0
 StopOnThrow=_ 0

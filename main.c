@@ -5,29 +5,33 @@ void SPI0_init(void);
 void SPI0_Write(unsigned char data);
 void SSI_send_char (uint32_t data);
 void Delay_ms(int time_ms); 
-void SSI_Receive_char (unsigned char * data);
-unsigned char data[];
+void SSI_Receive_char (uint32_t * data);
+uint8_t i=0;
+uint32_t data[256];
 /* Main routine of code */
 int main(void)
 {
-    unsigned char data[100];
+    
     unsigned char val1 = 'A';
     unsigned char val2 = 'B';
 
     SPI0_init();
+     
+    for (i = 0; i<255 ; i++)
+    {
+      data[i] = 0;
+    }
     
     while(1)
-		{              
-    SSI_send_char(val1); /* write a character */
-    Delay_ms(1000);
-    SSI_send_char(val2); /* write a character */
-    Delay_ms(1000);
-    SSI_Receive_char (data);
-    //printf(data[0]);
-    printf("\n");
-    
-    printf(val1);
+for (i = 0; i<255 ; i++)
+    {
+      SSI_send_char(val1+(i%2)); /* write a character */
+       SSI_Receive_char (&data[i]);
+       Delay_ms(100);
     }
+    
+   
+    
 }
 
 
@@ -57,7 +61,7 @@ ROM_GPIOPinTypeSSI(GPIO_PORTA_BASE,0x3c);
 //6. sets the SSI protocol, mode of operation, bit rate, and data width
   //ROM_SSIConfigSetExpClk(SSI0_BASE,120000000,SSI_FRF_MOTO_MODE_0,SSI_MODE_MASTER,F_SPI,8);
   ROM_SSIConfigSetExpClk(SSI0_BASE,ROM_SysCtlClockGet(),
-  SSI_FRF_MOTO_MODE_0,SSI_MODE_MASTER,4000000,8);
+  SSI_FRF_MOTO_MODE_3,SSI_MODE_MASTER,4000000,8);
 
   /* Setting Interrupt 
   NVIC_SetPriorityGrouping(0);
@@ -83,6 +87,7 @@ void Delay_ms(int time_ms)
 
  void ISR_SSI_handler()
  {
+     uint32_t *data;
      SSI_Receive_char (data);
      ROM_SSIIntClear(SSI0_BASE,SSI_RXFF );
  }

@@ -1,24 +1,20 @@
 ###############################################################################
 #
-# IAR ELF Linker V7.70.1.11437/W32 for ARM                08/Jun/2021  20:32:27
+# IAR ELF Linker V7.70.1.11437/W32 for ARM                08/Jun/2021  22:32:50
 # Copyright 2007-2016 IAR Systems AB.
 #
 #    Output file  =  
-#        C:\Users\Peter\Desktop\workingspace\Tiva_c -
-#        Copy\Debug\Exe\SPI_Master.out
+#        C:\Users\Peter\Desktop\workingspace\SPI_Master_v2\Debug\Exe\SPI_Master.out
 #    Map file     =  
-#        C:\Users\Peter\Desktop\workingspace\Tiva_c -
-#        Copy\Debug\List\SPI_Master.map
+#        C:\Users\Peter\Desktop\workingspace\SPI_Master_v2\Debug\List\SPI_Master.map
 #    Command line =  
-#        "C:\Users\Peter\Desktop\workingspace\Tiva_c -
-#        Copy\Debug\Obj\cstartup_M.o"
-#        "C:\Users\Peter\Desktop\workingspace\Tiva_c - Copy\Debug\Obj\main.o"
-#        "C:\Users\Peter\Desktop\workingspace\Tiva_c - Copy\Debug\Obj\SPI.o" -o
-#        "C:\Users\Peter\Desktop\workingspace\Tiva_c -
-#        Copy\Debug\Exe\SPI_Master.out" --map
-#        "C:\Users\Peter\Desktop\workingspace\Tiva_c -
-#        Copy\Debug\List\SPI_Master.map" --config "C:\Program Files (x86)\IAR
-#        Systems\Embedded Workbench
+#        C:\Users\Peter\Desktop\workingspace\SPI_Master_v2\Debug\Obj\cstartup_M.o
+#        C:\Users\Peter\Desktop\workingspace\SPI_Master_v2\Debug\Obj\main.o
+#        C:\Users\Peter\Desktop\workingspace\SPI_Master_v2\Debug\Obj\SPI.o -o
+#        C:\Users\Peter\Desktop\workingspace\SPI_Master_v2\Debug\Exe\SPI_Master.out
+#        --map
+#        C:\Users\Peter\Desktop\workingspace\SPI_Master_v2\Debug\List\SPI_Master.map
+#        --config "C:\Program Files (x86)\IAR Systems\Embedded Workbench
 #        7.5\arm\config\linker\TexasInstruments\TM4C123GH6.icf" --semihosting
 #        --entry __iar_program_start --vfe
 #
@@ -39,77 +35,47 @@ __SystemLibrary = DLib
 "A0":  place at 0x00000000 { ro section .intvec };
 "P1":  place in [from 0x00000000 to 0x0003ffff] { ro };
 "P2":  place in [from 0x20000000 to 0x20007fff] { rw, block CSTACK, block HEAP };
-initialize by copy { rw };
 
-  Section            Kind        Address    Size  Object
-  -------            ----        -------    ----  ------
-"A0":                                       0x60
-  .intvec            const    0x00000000    0x60  cstartup_M.o [1]
-                            - 0x00000060    0x60
+  Section          Kind        Address    Size  Object
+  -------          ----        -------    ----  ------
+"A0":                                     0x60
+  .intvec          const    0x00000000    0x60  cstartup_M.o [1]
+                          - 0x00000060    0x60
 
-"P1":                                     0x1c0c
-  .text              ro code  0x00000060   0xdca  xprintffull_nomb.o [3]
-  .text              ro code  0x00000e2a     0x2  cstartup_M.o [1]
-  .text              ro code  0x00000e2c    0x16  strchr.o [5]
-  .text              ro code  0x00000e42     0x2  cstartup_M.o [1]
-  .text              ro code  0x00000e44    0x36  strlen.o [5]
-  .text              ro code  0x00000e7a     0x2  cstartup_M.o [1]
-  .text              ro code  0x00000e7c    0x58  memchr.o [5]
-  .text              ro code  0x00000ed4    0xee  I64DivMod.o [5]
-  .text              ro code  0x00000fc2     0x2  cstartup_M.o [1]
-  .text              ro code  0x00000fc4    0x76  ABImemcpy_unaligned.o [5]
-  .text              ro code  0x0000103a    0x44  xdnorm.o [4]
-  .text              ro code  0x0000107e     0x2  cstartup_M.o [1]
-  .text              ro code  0x00001080    0x2e  DblCmpLe.o [4]
-  .text              ro code  0x000010ae     0x2  cstartup_M.o [1]
-  .text              ro code  0x000010b0    0x2e  DblCmpGe.o [4]
-  .text              ro code  0x000010de     0x2  cstartup_M.o [1]
-  .text              ro code  0x000010e0   0x114  xdscale.o [4]
-  .text              ro code  0x000011f4    0x58  DblToI32.o [4]
-  .text              ro code  0x0000124c    0x30  I32ToDbl.o [4]
-  .text              ro code  0x0000127c   0x180  DblSub.o [4]
-  .text              ro code  0x000013fc   0x1a2  DblMul.o [4]
-  .text              ro code  0x0000159e     0x2  cstartup_M.o [1]
-  .text              ro code  0x000015a0   0x256  DblDiv.o [4]
-  .text              ro code  0x000017f6     0xe  div.o [3]
-  .text              ro code  0x00001804     0x2  I64DivZer.o [5]
-  .text              ro code  0x00001806     0x2  cstartup_M.o [1]
-  .text              ro code  0x00001808    0xd4  DblAdd.o [4]
-  .text              ro code  0x000018dc   0x124  main.o [1]
-  .text              ro code  0x00001a00    0x38  SPI.o [1]
-  .text              ro code  0x00001a38    0x24  printf.o [3]
-  .text              ro code  0x00001a5c    0x6c  iarttio.o [6]
-  .text              ro code  0x00001ac8     0x8  XShttio.o [3]
-  .text              ro code  0x00001ad0    0x2c  copy_init3.o [5]
-  .text              ro code  0x00001afc    0x28  putchar.o [3]
-  .text              ro code  0x00001b24    0x10  write.o [6]
-  .text              ro code  0x00001b34    0x1e  dwrite.o [6]
-  .text              ro code  0x00001b52    0x20  iarwstd.o [6]
-  .text              ro code  0x00001b72    0x22  iarwrite.o [6]
-  .text              ro code  0x00001b94    0x28  data_init.o [5]
-  .text              ro code  0x00001bbc    0x22  fpinit_M.o [4]
-  .iar.init_table    const    0x00001be0    0x14  - Linker created -
-  .text              ro code  0x00001bf4    0x1a  cmain.o [5]
-  .text              ro code  0x00001c0e     0x4  low_level_init.o [3]
-  .text              ro code  0x00001c12     0x4  exit.o [3]
-  .text              ro code  0x00001c18     0xa  cexit.o [5]
-  .text              ro code  0x00001c24    0x14  exit.o [6]
-  .text              ro code  0x00001c38    0x16  xprout.o [3]
-  .text              ro code  0x00001c4e    0x10  cstartup_M.o [1]
-  Initializer bytes  const    0x00001c60     0xc  <for P2-1>
-  .rodata            const    0x00001c6c     0x0  copy_init3.o [5]
-                            - 0x00001c6c  0x1c0c
+"P1":                                    0x28c
+  .text            ro code  0x00000060   0x154  main.o [1]
+  .text            ro code  0x000001b4    0x38  SPI.o [1]
+  .text            ro code  0x000001ec    0x40  zero_init3.o [5]
+  .text            ro code  0x0000022c    0x28  data_init.o [5]
+  .text            ro code  0x00000254    0x22  fpinit_M.o [4]
+  .iar.init_table  const    0x00000278    0x10  - Linker created -
+  .text            ro code  0x00000288     0x2  cstartup_M.o [1]
+  .text            ro code  0x0000028c    0x1a  cmain.o [5]
+  .text            ro code  0x000002a6     0x4  low_level_init.o [3]
+  .text            ro code  0x000002aa     0x4  exit.o [3]
+  .text            ro code  0x000002ae     0x2  cstartup_M.o [1]
+  .text            ro code  0x000002b0     0xa  cexit.o [5]
+  .text            ro code  0x000002ba     0x2  cstartup_M.o [1]
+  .text            ro code  0x000002bc    0x14  exit.o [6]
+  .text            ro code  0x000002d0    0x10  cstartup_M.o [1]
+  .text            ro code  0x000002e0     0x2  cstartup_M.o [1]
+  .text            ro code  0x000002e2     0x2  cstartup_M.o [1]
+  .text            ro code  0x000002e4     0x2  cstartup_M.o [1]
+  .text            ro code  0x000002e6     0x2  cstartup_M.o [1]
+  .text            ro code  0x000002e8     0x2  cstartup_M.o [1]
+  .text            ro code  0x000002ea     0x2  cstartup_M.o [1]
+  .rodata          const    0x000002ec     0x0  zero_init3.o [5]
+                          - 0x000002ec   0x28c
 
-"P2", part 1 of 2:                           0xc
-  P2-1                        0x20000000     0x9  <Init block>
-    .data            inited   0x20000000     0x8  XShttio.o [3]
-    .bss             inited   0x20000008     0x1  main.o [1]
-                            - 0x20000009     0x9
+"P2", part 1 of 2:                       0x404
+  .bss             zero     0x20000000   0x400  main.o [1]
+  .bss             zero     0x20000400     0x1  main.o [1]
+                          - 0x20000401   0x401
 
-"P2", part 2 of 2:                        0x1000
-  CSTACK                      0x20000010  0x1000  <Block>
-    CSTACK           uninit   0x20000010  0x1000  <Block tail>
-                            - 0x20001010  0x1000
+"P2", part 2 of 2:                      0x1000
+  CSTACK                    0x20000408  0x1000  <Block>
+    CSTACK         uninit   0x20000408  0x1000  <Block tail>
+                          - 0x20001408  0x1000
 
 
 *******************************************************************************
@@ -118,11 +84,9 @@ initialize by copy { rw };
 
           Address     Size
           -------     ----
-Copy (__iar_copy_init3)
-    1 source range, total size 0xc (133% of destination):
-          0x00001c60   0xc
-    1 destination range, total size 0x9:
-          0x20000000   0x9
+Zero (__iar_zero_init3)
+    1 destination range, total size 0x401:
+          0x20000000  0x401
 
 
 
@@ -130,74 +94,47 @@ Copy (__iar_copy_init3)
 *** MODULE SUMMARY
 ***
 
-    Module                 ro code  ro data  rw data
-    ------                 -------  -------  -------
-C:\Users\Peter\Desktop\workingspace\Tiva_c - Copy\Debug\Obj: [1]
-    SPI.o                       56
-    cstartup_M.o                34       96
-    main.o                     292        1        1
-    ------------------------------------------------
-    Total:                     382       97        1
+    Module            ro code  ro data  rw data
+    ------            -------  -------  -------
+C:\Users\Peter\Desktop\workingspace\SPI_Master_v2\Debug\Obj: [1]
+    SPI.o                  56
+    cstartup_M.o           34       96
+    main.o                340             1 025
+    -------------------------------------------
+    Total:                430       96    1 025
 
 command line: [2]
-    ------------------------------------------------
+    -------------------------------------------
     Total:
 
 dl7M_tln.a: [3]
-    XShttio.o                    8        8        8
-    div.o                       14
-    exit.o                       4
-    low_level_init.o             4
-    printf.o                    36
-    putchar.o                   40
-    xprintffull_nomb.o       3 530
-    xprout.o                    22
-    ------------------------------------------------
-    Total:                   3 658        8        8
+    exit.o                  4
+    low_level_init.o        4
+    -------------------------------------------
+    Total:                  8
 
 m7M_tls.a: [4]
-    DblAdd.o                   212
-    DblCmpGe.o                  46
-    DblCmpLe.o                  46
-    DblDiv.o                   598
-    DblMul.o                   418
-    DblSub.o                   384
-    DblToI32.o                  88
-    I32ToDbl.o                  48
-    fpinit_M.o                  34
-    xdnorm.o                    68
-    xdscale.o                  276
-    ------------------------------------------------
-    Total:                   2 218
+    fpinit_M.o             34
+    -------------------------------------------
+    Total:                 34
 
 rt7M_tl.a: [5]
-    ABImemcpy_unaligned.o      118
-    I64DivMod.o                238
-    I64DivZer.o                  2
-    cexit.o                     10
-    cmain.o                     26
-    copy_init3.o                44
-    data_init.o                 40
-    memchr.o                    88
-    strchr.o                    22
-    strlen.o                    54
-    ------------------------------------------------
-    Total:                     642
+    cexit.o                10
+    cmain.o                26
+    data_init.o            40
+    zero_init3.o           64
+    -------------------------------------------
+    Total:                140
 
 shb_l.a: [6]
-    dwrite.o                    30
-    exit.o                      20
-    iarttio.o                  108
-    iarwrite.o                  34
-    iarwstd.o                   32
-    write.o                     16
-    ------------------------------------------------
-    Total:                     240
+    exit.o                 20
+    -------------------------------------------
+    Total:                 20
 
-    Gaps                         4        2
-    Linker created                       25    4 096
-----------------------------------------------------
-    Grand Total:             7 144      132    4 105
+    Gaps                    2        2
+    Linker created                  16    4 096
+-----------------------------------------------
+    Grand Total:          634      114    5 121
 
 
 *******************************************************************************
@@ -206,100 +143,54 @@ shb_l.a: [6]
 
 Entry                      Address   Size  Type      Object
 -----                      -------   ----  ----      ------
-.iar.init_table$$Base   0x00001be0          --   Gb  - Linker created -
-.iar.init_table$$Limit  0x00001bf4          --   Gb  - Linker created -
-?main                   0x00001bf5         Code  Gb  cmain.o [5]
-BusFault_Handler        0x00000fc3    0x2  Code  Wk  cstartup_M.o [1]
-CSTACK$$Base            0x20000010          --   Gb  - Linker created -
-CSTACK$$Limit           0x20001010          --   Gb  - Linker created -
-DebugMon_Handler        0x000010df    0x2  Code  Wk  cstartup_M.o [1]
-Delay_ms                0x000019ab   0x1a  Code  Gb  main.o [1]
-HardFault_Handler       0x00000e43    0x2  Code  Wk  cstartup_M.o [1]
-ISR_SSI_handler         0x000019c5   0x16  Code  Gb  main.o [1]
-LoadInt                 0x00000601   0x6e  Code  Lc  xprintffull_nomb.o [3]
-MemManage_Handler       0x00000e7b    0x2  Code  Wk  cstartup_M.o [1]
-NMI_Handler             0x00000e2b    0x2  Code  Wk  cstartup_M.o [1]
-PendSV_Handler          0x0000159f    0x2  Code  Wk  cstartup_M.o [1]
-Region$$Table$$Base     0x00001be0          --   Gb  - Linker created -
-Region$$Table$$Limit    0x00001bf4          --   Gb  - Linker created -
-SPI0_init               0x0000191f   0x8c  Code  Gb  main.o [1]
-SSI_Receive_char        0x00001a1f   0x10  Code  Gb  SPI.o [1]
-SSI_send_char           0x00001a01   0x1e  Code  Gb  SPI.o [1]
-SVC_Handler             0x000010af    0x2  Code  Wk  cstartup_M.o [1]
-SysTick_Handler         0x00001807    0x2  Code  Wk  cstartup_M.o [1]
-UsageFault_Handler      0x0000107f    0x2  Code  Wk  cstartup_M.o [1]
-_GenldFullNoMb          0x00000b79  0x26a  Code  Lc  xprintffull_nomb.o [3]
-_LdtobFullNoMb          0x00000779  0x3fa  Code  Lc  xprintffull_nomb.o [3]
-_LitobFullNoMb          0x0000066f  0x10a  Code  Lc  xprintffull_nomb.o [3]
-_PrintfFullNoMb         0x00000061  0x59a  Code  Gb  xprintffull_nomb.o [3]
-_Prout                  0x00001c39   0x16  Code  Gb  xprout.o [3]
-_PutcharsFullNoMb       0x00000de3   0x2e  Code  Lc  xprintffull_nomb.o [3]
-__aeabi_cdcmple         0x00001081         Code  Gb  DblCmpLe.o [4]
-__aeabi_cdrcmple        0x000010b1         Code  Gb  DblCmpGe.o [4]
-__aeabi_d2iz            0x000011f5         Code  Gb  DblToI32.o [4]
-__aeabi_d2uiz           0x00001221         Code  Gb  DblToI32.o [4]
-__aeabi_ddiv            0x000015a1         Code  Gb  DblDiv.o [4]
-__aeabi_dmul            0x000013fd         Code  Gb  DblMul.o [4]
-__aeabi_dsub            0x0000127d         Code  Gb  DblSub.o [4]
-__aeabi_i2d             0x0000124d         Code  Gb  I32ToDbl.o [4]
-__aeabi_ldiv0           0x00001805         Code  Gb  I64DivZer.o [5]
-__aeabi_ui2d            0x00001261         Code  Gb  I32ToDbl.o [4]
-__aeabi_uldivmod        0x00000ed5         Code  Gb  I64DivMod.o [5]
-__cmain                 0x00001bf5         Code  Gb  cmain.o [5]
-__dwrite                0x00001b35   0x1e  Code  Gb  dwrite.o [6]
-__exit                  0x00001c25   0x14  Code  Gb  exit.o [6]
-__iar_Dnorm             0x0000103b   0x44  Code  Gb  xdnorm.o [4]
-__iar_Dscale            0x000010e1  0x114  Code  Gb  xdscale.o [4]
-__iar_Memchr            0x00000e7d         Code  Gb  memchr.o [5]
-__iar_Strchr            0x00000e2d         Code  Gb  strchr.o [5]
-__iar_close_ttio        0x00001a5d   0x2e  Code  Gb  iarttio.o [6]
-__iar_copy_init3        0x00001ad1   0x2c  Code  Gb  copy_init3.o [5]
-__iar_d2uiz             0x0000122d         Code  Gb  DblToI32.o [4]
-__iar_dadd              0x00001809         Code  Gb  DblAdd.o [4]
-__iar_data_init3        0x00001b95   0x28  Code  Gb  data_init.o [5]
-__iar_dsub              0x00001291         Code  Gb  DblSub.o [4]
-__iar_dsubStart         0x000012a3         Code  Gb  DblSub.o [4]
-__iar_get_ttio          0x00001a8d   0x38  Code  Gb  iarttio.o [6]
-__iar_init_vfp          0x00001bbd         Code  Gb  fpinit_M.o [4]
-__iar_lookup_ttioh      0x00001ac9    0x8  Code  Gb  XShttio.o [3]
-__iar_program_start     0x00001c4f   0x10  Code  Gb  cstartup_M.o [1]
-__iar_sh_stdout         0x00001b53   0x20  Code  Gb  iarwstd.o [6]
-__iar_sh_write          0x00001b73   0x22  Code  Gb  iarwrite.o [6]
-__iar_ttio_handles      0x20000000    0x8  Data  Lc  XShttio.o [3]
-__iar_ui2d              0x00001265         Code  Gb  I32ToDbl.o [4]
-__iar_unaligned___aeabi_memcpy
-                        0x00000fc5         Code  Gb  ABImemcpy_unaligned.o [5]
-__iar_unaligned___aeabi_memcpy4
-                        0x00000fe5         Code  Gb  ABImemcpy_unaligned.o [5]
-__iar_unaligned___aeabi_memcpy8
-                        0x00000fe5         Code  Gb  ABImemcpy_unaligned.o [5]
-__low_level_init        0x00001c0f    0x4  Code  Gb  low_level_init.o [3]
+.iar.init_table$$Base   0x00000278          --   Gb  - Linker created -
+.iar.init_table$$Limit  0x00000288          --   Gb  - Linker created -
+?main                   0x0000028d         Code  Gb  cmain.o [5]
+BusFault_Handler        0x000002e1    0x2  Code  Wk  cstartup_M.o [1]
+CSTACK$$Base            0x20000408          --   Gb  - Linker created -
+CSTACK$$Limit           0x20001408          --   Gb  - Linker created -
+DebugMon_Handler        0x000002e7    0x2  Code  Wk  cstartup_M.o [1]
+Delay_ms                0x00000161   0x1a  Code  Gb  main.o [1]
+HardFault_Handler       0x000002af    0x2  Code  Wk  cstartup_M.o [1]
+ISR_SSI_handler         0x0000017b   0x14  Code  Gb  main.o [1]
+MemManage_Handler       0x000002bb    0x2  Code  Wk  cstartup_M.o [1]
+NMI_Handler             0x00000289    0x2  Code  Wk  cstartup_M.o [1]
+PendSV_Handler          0x000002e9    0x2  Code  Wk  cstartup_M.o [1]
+Region$$Table$$Base     0x00000278          --   Gb  - Linker created -
+Region$$Table$$Limit    0x00000288          --   Gb  - Linker created -
+SPI0_init               0x000000d5   0x8c  Code  Gb  main.o [1]
+SSI_Receive_char        0x000001d3   0x10  Code  Gb  SPI.o [1]
+SSI_send_char           0x000001b5   0x1e  Code  Gb  SPI.o [1]
+SVC_Handler             0x000002e5    0x2  Code  Wk  cstartup_M.o [1]
+SysTick_Handler         0x000002eb    0x2  Code  Wk  cstartup_M.o [1]
+UsageFault_Handler      0x000002e3    0x2  Code  Wk  cstartup_M.o [1]
+__cmain                 0x0000028d         Code  Gb  cmain.o [5]
+__exit                  0x000002bd   0x14  Code  Gb  exit.o [6]
+__iar_data_init3        0x0000022d   0x28  Code  Gb  data_init.o [5]
+__iar_init_vfp          0x00000255         Code  Gb  fpinit_M.o [4]
+__iar_program_start     0x000002d1   0x10  Code  Gb  cstartup_M.o [1]
+__iar_zero_init3        0x000001ed   0x40  Code  Gb  zero_init3.o [5]
+__low_level_init        0x000002a7    0x4  Code  Gb  low_level_init.o [3]
 __vector_table          0x00000000   0x60  Data  Gb  cstartup_M.o [1]
-__write                 0x00001b25   0x10  Code  Gb  write.o [6]
-_call_main              0x00001c01         Code  Gb  cmain.o [5]
-_exit                   0x00001c19         Code  Gb  cexit.o [5]
-_main                   0x00001c0b         Code  Gb  cmain.o [5]
-data                    0x20000008    0x1  Data  Gb  main.o [1]
-div                     0x000017f7    0xe  Code  Gb  div.o [3]
-exit                    0x00001c13    0x4  Code  Gb  exit.o [3]
-main                    0x000018dd   0x42  Code  Gb  main.o [1]
-memchr                  0x00000e7d         Code  Gb  memchr.o [5]
-printf                  0x00001a39   0x24  Code  Gb  printf.o [3]
-putchar                 0x00001afd   0x28  Code  Gb  putchar.o [3]
-strchr                  0x00000e2d         Code  Gb  strchr.o [5]
-strlen                  0x00000e45         Code  Gb  strlen.o [5]
+_call_main              0x00000299         Code  Gb  cmain.o [5]
+_exit                   0x000002b1         Code  Gb  cexit.o [5]
+_main                   0x000002a3         Code  Gb  cmain.o [5]
+data                    0x20000000  0x400  Data  Gb  main.o [1]
+exit                    0x000002ab    0x4  Code  Gb  exit.o [3]
+i                       0x20000400    0x1  Data  Gb  main.o [1]
+main                    0x00000061   0x74  Code  Gb  main.o [1]
 
 
-[1] = C:\Users\Peter\Desktop\workingspace\Tiva_c - Copy\Debug\Obj
+[1] = C:\Users\Peter\Desktop\workingspace\SPI_Master_v2\Debug\Obj
 [2] = command line
 [3] = dl7M_tln.a
 [4] = m7M_tls.a
 [5] = rt7M_tl.a
 [6] = shb_l.a
 
-  7 144 bytes of readonly  code memory
-    132 bytes of readonly  data memory
-  4 105 bytes of readwrite data memory
+    634 bytes of readonly  code memory
+    114 bytes of readonly  data memory
+  5 121 bytes of readwrite data memory
 
 Errors: none
 Warnings: none

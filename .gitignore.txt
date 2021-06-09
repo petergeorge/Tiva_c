@@ -1,0 +1,7 @@
+*.d
+*.o
+*.i
+*.dbo
+*.vscode
+**/Debug
+**/settings

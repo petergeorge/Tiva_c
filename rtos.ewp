@@ -1957,10 +1957,7 @@
     <name>$PROJ_DIR$\queue.c</name>
   </file>
   <file>
-    <name>$PROJ_DIR$\ssi.c</name>
-  </file>
-  <file>
-    <name>$PROJ_DIR$\ssi.h</name>
+    <name>$PROJ_DIR$\SPI.c</name>
   </file>
   <file>
     <name>$PROJ_DIR$\tasks.c</name>

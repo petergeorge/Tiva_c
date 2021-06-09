@@ -4,7 +4,7 @@
 #include "task.h"
 #include "queue.h"
 #include "UART.h"
-#include "ssi.h"
+#include "SPI.h"
 #include "I2C.h"
 #include "gpio.h"
 #include "pwm_functions.h"

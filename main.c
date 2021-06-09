@@ -1,12 +1,8 @@
 #include "main.h"
+#include "SPI.h"
 
-uint32_t SSI_tx_buffer [3] = {0};
-uint32_t SSI_rx_buffer [3] = {0};
-
-
-static void ssi_callout (boolean_t ssi_ret);
-
-uint8_t var = 0;
+uint8_t var =0;
+uint16_t i=0;
 uint32_t spi_rx_buffer [1024] = {0};
 uint32_t spi_tx_buffer [1024] = {0};
 
@@ -24,13 +20,13 @@ int main(void)
   for (loop_index = 0; loop_index <1024 ;loop_index++)
   {
 	  spi_tx_buffer[loop_index] = loop_index;
+    spi_rx_buffer[loop_index] = 1023-loop_index;
   }
   SSI_init();
-  SSI_Send_Receive_buffers (spi_rx_buffer, spi_tx_buffer, 1024, ssi_callout);
   
     debug_print("Init is done\n");
 
-          xTaskCreate (vSSI_Task, "SSI",100, NULL ,2, NULL);
+          //xTaskCreate (vSSI_Task, "SSI",100, NULL ,2, NULL);
           xTaskCreate (gpio_readTask, "gpioRead",100, NULL ,2, NULL);
           xTaskCreate (vTaskPwm, "PwmWrite",100, NULL ,2, NULL);
           debug_print("tasks created successfully\n");
@@ -47,16 +43,16 @@ void vUART_Task (void * para)
   }
 }
 
-void vSSI_Task (void * para)
+/* void vSSI_Task (void * para)
 {
   for(;;)
   {
     if(true == get_ssiFlagStatus())
     {
-    	ssi_cyclic();
+
     }
   }
-}
+} */
 
 void vI2C_Task (void * para)
 {
@@ -117,14 +113,10 @@ void vTaskPwm (void * para)
 }
 
 
-static void ssi_callout (boolean_t ssi_ret)
-{
-  if (ssi_ret == TRUE)
-  {
-    debug_print("ssi send receive completed suuccessfully \n");
-  }
-  else
-  {
-    debug_print("ssi send receive completed unsuuccessfully \n");
-  }
-}
+ void ISR_SSI_handler()
+ {    
+     SSI_Receive_char (&spi_rx_buffer[i]);
+     SSI_send_char(spi_tx_buffer[i]); /* write a character */
+     i++;
+     ROM_SSIIntClear(SSI0_BASE,SSI_RXFF );
+ }

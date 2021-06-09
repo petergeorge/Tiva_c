@@ -2315,9 +2315,6 @@
     </settings>
   </configuration>
   <file>
-    <name>$PROJ_DIR$\cstartup_M.c</name>
-  </file>
-  <file>
     <name>$PROJ_DIR$\gpio.h</name>
   </file>
   <file>

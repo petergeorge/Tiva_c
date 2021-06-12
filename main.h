@@ -21,3 +21,5 @@ void vSSI_Task (void * para);
 void gpio_readTask (void * para);
 
 void vTaskPwm (void * para);
+
+void vI2C_Task (void * para);

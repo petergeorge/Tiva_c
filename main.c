@@ -1,5 +1,4 @@
 #include "main.h"
-#include "SPI.h"
 
 uint8_t var =0;
 uint16_t i=0;
@@ -13,7 +12,6 @@ int main(void)
   pwm_pin_config(GPIO_PORTF_BASE, GPIO_PF2_M1PWM6);
   pwm_ch_config(PWM1_BASE, PWM_GEN_3, PWM_GEN_MODE_DOWN, 50000,14000, PWM_OUT_6);
   gpio_init(portf,GPIO_PIN_3,GPIO_DIR_MODE_OUT,GPIO_PIN_TYPE_STD);
-  // gpio_init(portf,GPIO_PIN_2,GPIO_DIR_MODE_OUT,GPIO_PIN_TYPE_STD);
   gpio_init(portf,GPIO_PIN_1,GPIO_DIR_MODE_OUT,GPIO_PIN_TYPE_STD);
   gpio_init(portf,GPIO_PIN_4,GPIO_DIR_MODE_IN,GPIO_PIN_TYPE_STD_WPU);
   gpio_init(portf,GPIO_PIN_0,GPIO_DIR_MODE_IN,GPIO_PIN_TYPE_STD_WPU);
@@ -23,12 +21,14 @@ int main(void)
     spi_rx_buffer[loop_index] = 1023-loop_index;
   }
   SSI_init();
+  InitI2C0();
   
     debug_print("Init is done\n");
 
-          //xTaskCreate (vSSI_Task, "SSI",100, NULL ,2, NULL);
           xTaskCreate (gpio_readTask, "gpioRead",100, NULL ,2, NULL);
           xTaskCreate (vTaskPwm, "PwmWrite",100, NULL ,2, NULL);
+          xTaskCreate (vI2C_Task, "twiSendStringTask",100, NULL ,2, NULL);
+          
           debug_print("tasks created successfully\n");
           vTaskStartScheduler();
           for(;;);
@@ -42,17 +42,6 @@ void vUART_Task (void * para)
     UART_send_string ("welcome \r\n");
   }
 }
-
-/* void vSSI_Task (void * para)
-{
-  for(;;)
-  {
-    if(true == get_ssiFlagStatus())
-    {
-
-    }
-  }
-} */
 
 void vI2C_Task (void * para)
 {

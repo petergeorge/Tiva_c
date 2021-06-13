@@ -2,7 +2,7 @@
 
 <workspace>
   <project>
-    <path>$WS_DIR$\SPI_Master.ewp</path>
+    <path>$WS_DIR$\I2C.ewp</path>
   </project>
   <batchBuild/>
 </workspace>

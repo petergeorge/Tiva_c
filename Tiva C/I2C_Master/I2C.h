@@ -21,6 +21,19 @@
 #include "pin_map.h"
 #include "hw_memmap.h"
 #include "TM4C123GH6PM.h"
+
+// Function prototypes initialize, tranmit and rea functions 
+void I2C3_Init (void);  
+char I2C3_Write_Multiple(int slave_address, char slave_memory_address, int bytes_count, char* data);
+char I2C3_read_Multiple(int slave_address, char slave_memory_address, int bytes_count, char* data);
+
+void InitI2C3(void);
+void I2CSend(uint8_t slave_addr, uint8_t num_of_args, ...);
+void I2CSendString(uint32_t slave_addr, char array[]);
+uint32_t I2CReceive(uint32_t slave_addr);
+
+
+
 //*****************************************************************************
 #define I2C_INT_MASTER          0x00000001
 #define I2C_INT_SLAVE           0x00000002

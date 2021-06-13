@@ -725,7 +725,7 @@
         </option>
         <option>
           <name>IlinkIcfFile</name>
-          <state>$TOOLKIT_DIR$\CONFIG\generic_cortex.icf</state>
+          <state>$TOOLKIT_DIR$\config\linker\TexasInstruments\TM4C123GH6.icf</state>
         </option>
         <option>
           <name>IlinkIcfFileSlave</name>
@@ -1920,6 +1920,9 @@
       <data/>
     </settings>
   </configuration>
+  <file>
+    <name>$PROJ_DIR$\I2C.c</name>
+  </file>
   <file>
     <name>$PROJ_DIR$\main.c</name>
   </file>

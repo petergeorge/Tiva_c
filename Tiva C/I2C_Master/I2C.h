@@ -20,7 +20,7 @@
 #include "sysctl.h"
 #include "pin_map.h"
 #include "hw_memmap.h"
-//#include "tm4c123gh6pm.h"
+#include "TM4C123GH6PM.h"
 //*****************************************************************************
 #define I2C_INT_MASTER          0x00000001
 #define I2C_INT_SLAVE           0x00000002

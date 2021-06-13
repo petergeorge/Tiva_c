@@ -1,4 +1,4 @@
-"D:\Shawadfy\I2C\main.c"
+"D:\Shawadfy\Github\Tiva C\I2C_Master\main.c"
 -std=c99
 -ferror-limit=100
 -I
